@@ -144,7 +144,6 @@ static void Resize(GLFWwindow* window, int w, int h) {
 	glLoadIdentity();
 	gluPerspective(25.0f, (float)w / (float)h, 0.1f, 1000.0f);
 	posx = 0, posy = 0, posz = 0;
-	gluLookAt(posx, posy + 2.0f, posz + 10.0f, posx, posy, posz, 0, 3, 0);
 	glMatrixMode(GL_MODELVIEW);
 
 }
@@ -172,8 +171,8 @@ static void MouseClickCallback(GLFWwindow* window, int button, int action, int m
 		case GLFW_MOUSE_BUTTON_RIGHT:
 			dragging = 2;
 			if (action == GLFW_RELEASE) {
-				posx -= dragx * 0.1;
-				posy += dragy * 0.1;
+				posx -= dragx * 0.03;
+				posy += dragy * 0.03;
 				dragx = 0;
 				dragy = 0;
 				dragging = 0;
@@ -225,7 +224,7 @@ Box b[10];
 static void RenderScene(GLFWwindow* window, float delta) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPushMatrix();
-	gluLookAt(posx,posy+2,posz+10,posx,posy,posz,0,3,0);
+	gluLookAt(posx,posy+3,posz+10,posx,posy,posz,0,3,0);
 	glScaled(zoom, zoom, zoom);
 	std::cout << dragging << std::endl;
 	if (dragging == 1) {
@@ -271,6 +270,7 @@ int main(int argc, char** argv) {
 	glfwSetCursorPosCallback(window, MouseMotionCallback);
 	glfwSetScrollCallback(window, scroll_callback);
 	glEnable(GL_DEPTH_TEST);
+	glClearColor(1.0, 1.0, 1.0, 1.0);
 	for (int i = 0; i < 10; i++) {
 		b[i].setPosition(cos((float)i/5*PI) * 5, 0, sin((float)i / 5 * PI)*5);
 	}
