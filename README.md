@@ -1,2 +1,2 @@
 # GLFWOpenGLExample
-OpenGL Shapes
+OpenGL Shapes in Visual Studio C++
